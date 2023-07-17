@@ -1,7 +1,6 @@
 import { apiRoot } from "./handson/client";
 import { log } from "./utils/logger";
 
-
 const query = `
 query {
     orders {
@@ -22,14 +21,15 @@ query {
   }
   `;
 
+//checked but no idea about how to fetch graphQL query
 apiRoot
   .graphql()
   .post({
     body: {
       query,
-      variables: {}
-    }
+      variables: {},
+    },
   })
   .execute()
   .then(log)
-  .catch(log)
+  .catch(log);
