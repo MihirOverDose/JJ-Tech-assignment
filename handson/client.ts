@@ -61,7 +61,7 @@ const ctpCliendBuilderOfEnv = ({
       },
     },
   };
-  if ((type = "ME")) {
+  if (type == "ME") {
     return new ClientBuilder()
       .withProjectKey(projectKey)
       .withPasswordFlow(passwordMiddlewareOptions)
