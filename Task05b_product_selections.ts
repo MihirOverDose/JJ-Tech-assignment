@@ -1,23 +1,39 @@
-import { getProductsInStore, addProductSelectionToStore } from "./handson/store";
 import {
-    getProductSelectionByKey,
-    createProductSelection,
-    addProductsToProductSelection,
-    getProductsInProductSelection
+  getProductsInStore,
+  addProductSelectionToStore,
+} from "./handson/store";
+import {
+  getProductSelectionByKey,
+  createProductSelection,
+  addProductsToProductSelection,
+  getProductsInProductSelection,
 } from "./handson/productSelections";
 
 import { log } from "./utils/logger";
 
 const productSelectionKey = "tt-berlin-store-selection";
 
-createProductSelection(productSelectionKey, "Berlin Store Selection").then(log).catch(log);
+//done
+// createProductSelection(productSelectionKey, "Berlin Store Selection")
+//   .then(log)
+//   .catch(log);
 
+//done
 // getProductSelectionByKey(productSelectionKey).then(log).catch(log);
 
-// addProductsToProductSelection(productSelectionKey, ['tulip-seed-product']).then(log).catch(log);
+// done
 
+//note...: this is product Key
+// addProductsToProductSelection(productSelectionKey, ["82378"])
+//   .then(log)
+//   .catch(log);
+
+//done
 // getProductsInProductSelection(productSelectionKey).then(log).catch(log);
 
-// addProductSelectionToStore("berlin-store", productSelectionKey).then(log).catch(log);
+//this is storeKey
+//done
+// addProductSelectionToStore("default", productSelectionKey).then(log).catch(log);
 
-// getProductsInStore("berlin-store").then(log).catch(log);
+//done
+getProductsInStore("default").then(log).catch(log);
