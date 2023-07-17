@@ -17,6 +17,9 @@ type ctpClientBuilderType = {
   clientSecret: string;
   scopes?: string[];
   authUrl: string;
+  username?: string;
+  password?: string;
+  type?: string;
 };
 
 const ctpCliendBuilderOfEnv = ({
@@ -25,6 +28,9 @@ const ctpCliendBuilderOfEnv = ({
   clientId,
   clientSecret,
   authUrl,
+  username,
+  password,
+  type,
 }: ctpClientBuilderType) => {
   // Configure authMiddlewareOptions
   const authMiddlewareOptions: AuthMiddlewareOptions = {
@@ -42,6 +48,26 @@ const ctpCliendBuilderOfEnv = ({
     host: host,
     fetch,
   };
+
+  const passwordMiddlewareOptions: PasswordAuthMiddlewareOptions = {
+    host: authUrl,
+    projectKey: projectKey,
+    credentials: {
+      clientId: clientId,
+      clientSecret,
+      user: {
+        username: username!,
+        password: password!,
+      },
+    },
+  };
+  if ((type = "ME")) {
+    return new ClientBuilder()
+      .withProjectKey(projectKey)
+      .withPasswordFlow(passwordMiddlewareOptions)
+      .withHttpMiddleware(httpMiddlewareOptions)
+      .build();
+  }
 
   return new ClientBuilder()
     .withProjectKey(projectKey)
@@ -120,6 +146,9 @@ const createMyApiClient = (): ApiRoot => {
       clientId: myConfig.clientId,
       clientSecret: myConfig.clientSecret,
       projectKey: myConfig.projectKey,
+      username: myConfig.username,
+      password: myConfig.password,
+      type: "ME",
     });
     const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
       projectKey: myConfig.projectKey,
